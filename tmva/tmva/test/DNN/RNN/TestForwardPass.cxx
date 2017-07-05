@@ -23,8 +23,8 @@ using namespace TMVA::DNN::RNN;
 int main() {
   std::cout << "Testing RNN Forward pass" << std::endl;
 
-  std::cout << "Test1" << std::endl;
-  
+  double error;
+  testForwardPass<TReference<double>>(3, 8, 100, 50);
 
   return 0;
 }
