@@ -280,15 +280,15 @@ auto inline TBasicRNNLayer<Architecture_t>::Forward(Matrix_t &input)
 -> Matrix_t & 
 {
   // State = act(W_input . input + W_state . state + bias) 
-  Matrix_t & fState = this->GetState(); 
+  Matrix_t & state = this->GetState(); 
   const DNN::EActivationFunction fF = this->GetActivationFunction(); 
-  Matrix_t tmpState(fState.GetNrows(), fState.GetNcols());
-  Architecture_t::MultiplyTranspose(tmpState, fState, fWeightsState);
-  Architecture_t::MultiplyTranspose(fState, input, fWeightsInput);
-  Architecture_t::ScaleAdd(fState, tmpState);
-  Architecture_t::AddRowWise(fState, fBiases);
-  DNN::evaluate<Architecture_t>(fState, fF);
-  return this->GetState();
+  Matrix_t tmpState(state.GetNrows(), state.GetNcols());
+  Architecture_t::MultiplyTranspose(tmpState, state, fWeightsState);
+  Architecture_t::MultiplyTranspose(state, input, fWeightsInput);
+  Architecture_t::ScaleAdd(state, tmpState);
+  Architecture_t::AddRowWise(state, fBiases);
+  DNN::evaluate<Architecture_t>(state, fF);
+  return this->GetState();  // state here is limited to scope of function
 }
 
 //______________________________________________________________________________

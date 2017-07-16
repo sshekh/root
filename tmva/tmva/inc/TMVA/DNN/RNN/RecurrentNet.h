@@ -133,8 +133,8 @@ auto inline TRecurrentNet<Architecture_t>::Forward(Tensor_t &input)
 -> Tensor_t & 
 {
   if (!this->rememberState) fRNNLayer->InitState(DNN::EInitialization::kZero);
-  for (size_t i = 0; i < fTimeSteps; ++i) {
-    Architecture_t::Copy(fOutput[i], fRNNLayer->Forward(input[i]));
+  for (size_t t = 0; t < fTimeSteps; ++t) {
+    Architecture_t::Copy(fOutput[t], fRNNLayer->Forward(input[t]));
   }
   return fOutput;
 }
